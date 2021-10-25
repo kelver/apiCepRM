@@ -47,7 +47,7 @@ jobs:
           ARGS: "-rltgoDzvO --exclude .git --exclude .docker --exclude .github"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /home/${{ secrets.SSH_USER }}/apiIclinic
+          TARGET: /var/www/IClinicApi/
 
       - name: Execute commands SSH
         uses: appleboy/ssh-action@master
