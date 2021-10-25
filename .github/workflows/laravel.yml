@@ -40,15 +40,6 @@ jobs:
         with:
           ref: main
 
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --exclude .git --exclude .docker --exclude .github"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /home/${{ secrets.SSH_USER }}/IClinicApi
-
       - name: Execute commands SSH
         uses: appleboy/ssh-action@master
         env:
