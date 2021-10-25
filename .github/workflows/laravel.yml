@@ -1,8 +1,8 @@
-name: ApiIClinic
+name: IClinicApi
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   api-tests:
@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
 
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@v2.2.11
