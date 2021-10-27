@@ -13,8 +13,8 @@ class AddressRepopsitory
         $this->service = $service;
     }
 
-    public function buscaCep(string $cep)
+    public function buscaCep(string $address)
     {
-        return $this->service->buscaCep($cep);
+        return $this->service->buscaCep($address);
     }
 }

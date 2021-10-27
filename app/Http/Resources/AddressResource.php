@@ -16,7 +16,7 @@ class AddressResource extends JsonResource
     {
         return [
             'identify'        => $this->uuid,
-            'cep'             => $this->cep,
+            'cep'             => substr_replace($this->cep, '-', -3, 0),
             'logradouro'      => $this->logradouro,
             'bairro'          => $this->bairro,
             'cidade'          => $this->cidade,

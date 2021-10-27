@@ -21,9 +21,15 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function buscaCep(string $cep)
+    public function buscaCep(string $address)
     {
-        return new AddressResource($this->repository->buscaCep($cep));
+        $data = $this->repository->buscaCep($address);
+
+        if(is_array($data) && array_key_exists('Error', $data)){
+            return response()->json(['data' => $data], 422);
+        }
+
+        return AddressResource::collection($data);
     }
 
     /**

@@ -7,4 +7,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (Request $request) {
     return response()->json(['message' => 'ok']);
 });
-Route::get('cep/{cep}', [AddressController::class, 'buscaCep'])->name('buscaCep');
+Route::get('cep/{address}', [AddressController::class, 'buscaCep'])->name('buscaCep');
