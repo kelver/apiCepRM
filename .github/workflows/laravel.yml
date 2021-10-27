@@ -1,4 +1,4 @@
-name: IClinicApi
+name: ApiCepRM
 
 on:
   push:
@@ -31,34 +31,3 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
         run: vendor/bin/phpunit
-  api-cd:
-    name: CD
-    needs: api-tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: main
-
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --exclude .git --exclude .docker --exclude .github"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /home/${{ secrets.SSH_USER }}/IClinicApi
-
-      - name: Execute commands SSH
-        uses: appleboy/ssh-action@master
-        env:
-          USER_PASS: "${{ secrets.USER_PASS }}"
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          envs: USER_PASS
-          script: |
-            ls -la
-            echo $USER_PASS | sudo -S docker ps
