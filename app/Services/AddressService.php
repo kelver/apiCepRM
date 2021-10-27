@@ -32,7 +32,6 @@ class AddressService
             }
             return $buscaLocal;
         }
-
         $buscaFull = $this->searchTextRemote($address);
 
         return $buscaFull;
@@ -50,6 +49,20 @@ class AddressService
         $localData = $this->saveLocalData($response->json());
 
         return $localData;
+    }
+
+    public function searchFullText(array $address)
+    {
+        $data = Address::whereFuzzy('logradouro', $address['address'])
+            ->orderBy('relevance_logradouro', 'desc')
+            ->get();
+
+        if($data->isEmpty()){
+            $localData = $this->searchTextRemote($address);
+
+            return $localData;
+        }
+        return $data;
     }
 
     public function searchTextRemote(array $address)

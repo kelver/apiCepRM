@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Address;
 use App\Observers\AddressObserver;
+use App\Observers\ElasticsearchObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
