@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AccessTest extends TestCase
@@ -13,10 +11,22 @@ class AccessTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_access_to_api()
     {
-        $response = $this->get('/');
+        $response = $this->get('/api');
 
         $response->assertStatus(200);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_api_json_return()
+    {
+        $response = $this->get('/api/cep/78088000');
+
+        $response->assertJsonCount(1);
     }
 }
